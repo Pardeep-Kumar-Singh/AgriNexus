@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriNexus</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: white;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            /* background-color: white; */
+            border-radius: 8px;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+            max-width: 400px;
+            width: 90%;
+        }
+        .container img{
+            height: 120px;
+            width: 100px;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center; /* Center text within button */
+        }
+
+        .login-button {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .signup-button {
+            background-color: #eee;
+            color: #333;
+        }
+
+        .or-line {
+            margin: 20px 0;
+            text-align: center;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.5em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="AGRINEXUS.png" alt="AgriNexus Logo" class="logo">
+        <h1 class="title">Welcome to AgriNexus</h1>
+        <p class="subtitle">Empowering Farmers with AI for Smart Agriculture</p>
+
+        <a href="index2.html" class="button login-button">Log In Now</a>
+
+        <div class="or-line">OR</div>
+
+        <a href="index3.html" class="button signup-button">Sign Up</a>
+    </div>
+</body>
+</html>

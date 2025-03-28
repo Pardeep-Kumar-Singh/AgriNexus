@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriNexus</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: white;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .container img {
+            height: 120px;
+            width: 100px;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.5em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+        }
+    </style>
+    <script>
+        // Redirect to f2.html after 3 seconds
+        setTimeout(function() {
+            window.location.href = "index1.html";
+        }, 2000);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="AGRINEXUS.png" alt="AgriNexus Logo" class="logo">
+        <h1 class="title">Welcome to AgriNexus</h1>
+        <p class="subtitle">Empowering Farmers with AI for Smart Agriculture</p>
+    </div>
+</body>
+</html>

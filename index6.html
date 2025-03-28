@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Category</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .category {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            border: 2px solid transparent;
+        }
+
+        .category img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .category-text {
+            text-align: left;
+        }
+
+        .category h3 {
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        .category span {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .category:hover, .category.active {
+            border-color: #6ede5f;
+            background-color: #eaffea;
+        }
+
+        .continue-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            background-color: #6ede5f;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .continue-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 480px) {
+            .category {
+                padding: 12px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 13px;
+            }
+
+            .category h3 {
+                font-size: 14px;
+            }
+
+            .continue-btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Select Category</h2>
+        <p>Choose what you want to monitor</p>
+
+        <div class="category" onclick="selectCategory(this, 'Plants')">
+            <img src="Plants.png" alt="Plants">
+            <div class="category-text">
+                <h3>Plants</h3>
+                <span>Monitor indoor and outdoor plants</span>
+            </div>
+        </div>
+
+        <div class="category" onclick="selectCategory(this, 'Crops')">
+            <img src="Crops.png" alt="Crops">
+            <div class="category-text">
+                <h3>Crops</h3>
+                <span>Monitor agricultural crops</span>
+            </div>
+        </div>
+
+        <div class="category" onclick="selectCategory(this, 'Both')">
+            <img src="Both.png" alt="Both">
+            <div class="category-text">
+                <h3>Both</h3>
+                <span>Monitor all types of plants</span>
+            </div>
+        </div>
+
+        <button class="continue-btn" id="continueBtn" disabled onclick="proceedToNext()">Continue</button>
+    </div>
+
+    <script>
+        let selectedCategory = null;
+
+        function selectCategory(element, category) {
+            document.querySelectorAll('.category').forEach(cat => cat.classList.remove('active'));
+            element.classList.add('active');
+            selectedCategory = category;
+            document.getElementById("continueBtn").disabled = false;
+        }
+
+        function proceedToNext() {
+            if (selectedCategory) {
+                window.location.href = "index7.html";
+            }
+        }
+    </script>
+
+</body>
+</html>

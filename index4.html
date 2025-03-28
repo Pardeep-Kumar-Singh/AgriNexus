@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permissions Popup</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .permissions-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .permission-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .permission-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .permission-description {
+            flex-grow: 1;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        button a{
+            text-decoration: none;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="permissions-container">
+        <h2>Allow Permissions</h2>
+        <img src="DIV@1x.png" alt="Permissions Image">
+
+        <div class="permission-item">
+            <span class="permission-icon"><img src="cam.png" alt="Camera Icon"></span>
+            <div class="permission-description">
+                Camera Access<br>
+                For scanning QRcodes/taking photos
+            </div>
+            <label class="toggle-switch">
+                <input type="checkbox" id="cameraToggle" style="width: 48px;">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="permission-item">
+            <span class="permission-icon"><img src="loc.png" alt="Location Icon"></span>
+            <div class="permission-description">
+                Location Access<br>
+                For personalized local experiences
+            </div>
+            <label class="toggle-switch">
+                <input type="checkbox" id="locationToggle" style="width: 48px;">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <button id="submitBtn"><a href="index6.html">Submit</a></button>
+    </div>
+
+    <script>
+        document.getElementById("cameraToggle").addEventListener("change", function() {
+            if (this.checked) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                .then(() => alert("Camera permission granted"))
+                .catch(() => {
+                    alert("Camera permission denied");
+                    this.checked = false;
+                });
+            }
+        });
+
+        document.getElementById("locationToggle").addEventListener("change", function() {
+            if (this.checked) {
+                navigator.geolocation.getCurrentPosition(
+                    () => alert("Location permission granted"),
+                    () => {
+                        alert("Location permission denied");
+                        this.checked = false;
+                    }
+                );
+            }
+        });
+
+        document.getElementById("submitBtn").addEventListener("click", function() {
+            let cameraStatus = document.getElementById("cameraToggle").checked ? "Enabled" : "Disabled";
+            let locationStatus = document.getElementById("locationToggle").checked ? "Enabled" : "Disabled";
+            alert(`Permissions:\nCamera: ${cameraStatus}\nLocation: ${locationStatus}`);
+        });
+    </script>
+</body>
+</html>

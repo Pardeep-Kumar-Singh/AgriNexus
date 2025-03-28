@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Capture & Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .camera-section, .captured-section {
+            margin: 20px auto;
+            padding: 10px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 420px;
+        }
+        video {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+        canvas {
+            display: none;
+        }
+        .btn {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #28a745;
+            color: white;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+        .captured-images img {
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+        .upload-section {
+            margin-top: 20px;
+        }
+        .upload-section input {
+            display: none;
+        }
+        .upload-label {
+            display: block;
+            width: 90%;
+            max-width: 420px;
+            margin: 10px auto;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .upload-label:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Camera Capture & Scanner</h2>
+        <div class="camera-section">
+            <video id="video" autoplay playsinline></video>
+            <canvas id="canvas"></canvas>
+            <button class="btn" onclick="captureImage()">📸 Capture</button>
+            <button class="btn" onclick="switchCamera()">🔄 Switch Camera</button>
+            <button class="btn" onclick="scanImage()">📄 Scan Image</button>
+        </div>
+        <div class="upload-section">
+            <h3>Upload Image</h3>
+            <label for="fileInput" class="upload-label">📂 Choose an Image</label>
+            <input type="file" id="fileInput" accept="image/*" onchange="uploadImage(event)">
+        </div>
+        <div class="captured-section">
+            <h3>Captured & Uploaded Images</h3>
+            <div class="captured-images" id="capturedImages"></div>
+        </div>
+    </div>
+
+    <script>
+        let video = document.getElementById('video');
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        let capturedImagesContainer = document.getElementById('capturedImages');
+        let useFrontCamera = true;
+        let currentStream;
+
+        async function startCamera() {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+            }
+            
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: useFrontCamera ? 'user' : 'environment' }
+                });
+                currentStream = stream;
+                video.srcObject = stream;
+                video.play();
+            } catch (err) {
+                console.error("Camera access error:", err);
+            }
+        }
+
+        function captureImage() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            let imageData = canvas.toDataURL('image/png');
+            let img = document.createElement('img');
+            img.src = imageData;
+            capturedImagesContainer.appendChild(img);
+        }
+
+        function switchCamera() {
+            useFrontCamera = !useFrontCamera;
+            startCamera();
+        }
+
+        function scanImage() {
+            alert("Scanning feature to be implemented...");
+        }
+
+        function uploadImage(event) {
+            let file = event.target.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let img = document.createElement('img');
+                    img.src = e.target.result;
+                    capturedImagesContainer.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        window.onload = startCamera;
+    </script>
+</body>
+</html>
